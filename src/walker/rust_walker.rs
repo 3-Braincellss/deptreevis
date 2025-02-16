@@ -6,7 +6,9 @@ pub struct RustWalker {
 
 impl Walker for RustWalker {
     fn walk(&self) -> String {
-        String::from("Rust walking logic here.")
+        let mut out = String::from("Rust walker walking through project at");
+        out.push_str(&self.file_path.clone());
+        return out;
     }
 }
 

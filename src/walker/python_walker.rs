@@ -6,7 +6,9 @@ pub struct PythonWalker {
 
 impl Walker for PythonWalker {
     fn walk(&self) -> String {
-        String::from("Python walking logic here.")
+        let mut out = String::from("Python walker walking through project at ");
+        out.push_str(&self.file_path.clone());
+        return out;
     }
 }
 
