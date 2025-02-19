@@ -1,14 +1,18 @@
-use crate::walker::Walker;
+use crate::{dep_tree_vis_file::DepTreeVisFile, walker::Walkable};
 
 pub struct PythonWalker {
     file_path: String,
 }
 
-impl Walker for PythonWalker {
-    fn walk(&self) -> String {
-        let mut out = String::from("Python walker walking through project at ");
-        out.push_str(&self.file_path.clone());
-        return out;
+impl Walkable for PythonWalker {
+    fn walk(&self, file: &mut DepTreeVisFile) {
+        let import_statements: Vec<String> = file
+            .read()
+            .split("\n")
+            .filter(|line| line.starts_with("import") || line.starts_with("from"))
+            .map(String::from)
+            .collect();
+        println!("{:?}", import_statements)
     }
 }
 

@@ -15,7 +15,7 @@ impl DepTreeVisFile {
         }
     }
 
-    pub fn read(self) -> String {
+    pub fn read(&self) -> String {
         fs::read_to_string(
             self.path
                 .to_str()

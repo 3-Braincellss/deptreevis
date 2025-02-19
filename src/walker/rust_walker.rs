@@ -1,15 +1,11 @@
-use crate::walker::Walker;
+use crate::{dep_tree_vis_file::DepTreeVisFile, walker::Walkable};
 
 pub struct RustWalker {
     file_path: String,
 }
 
-impl Walker for RustWalker {
-    fn walk(&self) -> String {
-        let mut out = String::from("Rust walker walking through project at");
-        out.push_str(&self.file_path.clone());
-        return out;
-    }
+impl Walkable for RustWalker {
+    fn walk(&self, file: &mut DepTreeVisFile) {}
 }
 
 impl RustWalker {
