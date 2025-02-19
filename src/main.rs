@@ -1,6 +1,5 @@
 use std::env;
 
-use file_node::FileNode;
 use walker::{python_walker::PythonWalker, rust_walker::RustWalker, Walker};
 pub mod file_node;
 pub mod walker;
