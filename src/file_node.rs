@@ -2,12 +2,12 @@ use std::fs;
 use std::path::PathBuf;
 
 #[derive(Debug)]
-pub struct DepTreeVisFile {
+pub struct FileNode {
     path: PathBuf,
-    children: Vec<Box<DepTreeVisFile>>,
+    children: Vec<Box<FileNode>>,
 }
 
-impl DepTreeVisFile {
+impl FileNode {
     pub fn new(path: &str) -> Self {
         Self {
             path: PathBuf::from(path),
