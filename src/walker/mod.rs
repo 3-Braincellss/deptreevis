@@ -1,8 +1,8 @@
-use crate::dep_tree_vis_file::DepTreeVisFile;
+use crate::file_node::FileNode;
 
 pub mod python_walker;
 pub mod rust_walker;
 
-pub trait Walkable {
-    fn walk(&self, file: &mut DepTreeVisFile);
+pub trait Walker {
+    fn walk(&self, file: &mut FileNode);
 }

@@ -1,11 +1,11 @@
-use crate::{dep_tree_vis_file::DepTreeVisFile, walker::Walkable};
+use crate::{file_node::FileNode, walker::Walker};
 
 pub struct PythonWalker {
     file_path: String,
 }
 
-impl Walkable for PythonWalker {
-    fn walk(&self, file: &mut DepTreeVisFile) {
+impl Walker for PythonWalker {
+    fn walk(&self, file: &mut FileNode) {
         let import_statements: Vec<String> = file
             .read()
             .split("\n")
