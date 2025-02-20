@@ -11,7 +11,11 @@ enum FileExtension {
 
 fn main() {
     let args: Vec<String> = env::args().collect();
-    let path = args.get(1).expect("No path supplied.");
+    assert!(
+        args.iter().count() == 2,
+        "Usage: ./deptreevis <PROJECT-PATH>"
+    );
+    let path = args.get(1).unwrap();
     let walker: Box<dyn Walker> = file_extension_to_walker(path);
     println!("{:?}", walker.walk());
 }
