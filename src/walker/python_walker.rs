@@ -11,7 +11,7 @@ impl Walker for PythonWalker {
             .expect(&format!("Path not found. {}", path))
             .split("\n")
             .filter(|line| line.starts_with("import") || line.starts_with("from"))
-            .map(String::from)
+            .map(|import_statement| self.import_statement_to_path(import_statement))
             .collect();
     }
 }
@@ -24,10 +24,12 @@ impl PythonWalker {
     }
 
     fn import_statement_to_path(&self, path: &str) -> String {
-        return path
+        let mut out = path
             .split(" ")
             .nth(1)
             .expect("Malformed import statement found.")
             .replace(".", "/");
+        out.push_str(".py");
+        return out;
     }
 }

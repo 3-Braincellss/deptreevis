@@ -16,18 +16,30 @@ fn main() {
         args.iter().count() == 2,
         "Usage: ./deptreevis <PROJECT-PATH>"
     );
-    let path = args.get(1).unwrap();
-    let walker: Box<dyn Walker> = file_extension_to_walker(path);
+    let path = String::from(args.get(1).unwrap());
+    let walker: Box<dyn Walker> = file_extension_to_walker(&path);
     println!("{:?}", traverse(walker, path));
 }
 
-fn traverse(walker: Box<dyn Walker>, path: &str) -> HashMap<String, Vec<String>> {
+fn traverse(walker: Box<dyn Walker>, path: String) -> HashMap<String, Vec<String>> {
+    let mut root_dir: String = path
+        .split("/")
+        .take(path.split("/").count() - 1)
+        .map(String::from)
+        .collect::<Vec<String>>()
+        .join("/");
+    root_dir.push_str("/");
     let mut dependancy_tree: HashMap<String, Vec<String>> = HashMap::new();
     let mut to_visit: VecDeque<String> = VecDeque::from([String::from(path)]);
 
     while !to_visit.is_empty() {
         let current = to_visit.pop_front().unwrap();
-        let dependants = walker.walk(&current);
+        let mut dependants: Vec<String> = walker.walk(&current);
+        for dependant in dependants.iter_mut() {
+            let mut new_dependant = root_dir.clone();
+            new_dependant.push_str(dependant);
+            *dependant = new_dependant;
+        }
         dependancy_tree.insert(current, dependants.clone());
         to_visit.append(&mut VecDeque::from_iter(dependants.into_iter()));
     }
