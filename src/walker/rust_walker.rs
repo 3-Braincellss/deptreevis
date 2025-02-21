@@ -1,11 +1,13 @@
-use crate::{file_node::FileNode, walker::Walker};
+use crate::walker::Walker;
 
 pub struct RustWalker {
     file_path: String,
 }
 
 impl Walker for RustWalker {
-    fn walk(&self, file: &mut FileNode) {}
+    fn walk(&self, path: &str) -> Vec<String> {
+        panic!("Not Implemented");
+    }
 }
 
 impl RustWalker {
