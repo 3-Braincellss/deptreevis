@@ -2,7 +2,6 @@ pub mod walker;
 
 pub mod traversal {
     use crate::walker::Walker;
-    use core::panic;
     use std::collections::HashMap;
     use std::collections::HashSet;
     use std::collections::VecDeque;
@@ -15,14 +14,14 @@ pub mod traversal {
             .collect::<Vec<String>>()
             .join("/");
         root_dir.push_str("/");
-        let mut dependancy_tree: HashMap<String, Vec<String>> = HashMap::new();
+        let mut dependency_tree: HashMap<String, Vec<String>> = HashMap::new();
         let mut to_visit: VecDeque<String> = VecDeque::from([String::from(path)]);
         let mut seen: HashSet<String> = HashSet::new();
 
         while !to_visit.is_empty() {
             let current = to_visit.pop_front().unwrap();
             if seen.contains(&current) {
-                panic!("Circular dependancy detected!");
+                continue;
             }
             seen.insert(current.clone());
             let mut dependants: Vec<String> = walker.walk(&current);
@@ -31,10 +30,10 @@ pub mod traversal {
                 new_dependant.push_str(dependant);
                 *dependant = new_dependant;
             }
-            dependancy_tree.insert(current, dependants.clone());
+            dependency_tree.insert(current, dependants.clone());
             to_visit.append(&mut VecDeque::from_iter(dependants.into_iter()));
         }
-        return dependancy_tree;
+        return dependency_tree;
     }
 }
 

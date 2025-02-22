@@ -35,8 +35,21 @@ fn test_local_imports() {
 }
 
 #[test]
-#[should_panic(expected = "Circular dependancy detected!")]
 fn test_circular_dependancy() {
     let walker: Box<dyn Walker> = Box::new(PythonWalker::new());
-    traverse(walker, String::from("snippets/snip_python_2/run.py"));
+    let dependants = traverse(walker, String::from("snippets/snip_python_2/run.py"));
+    let mut expected = HashMap::new();
+    expected.insert(
+        String::from("snippets/snip_python_2/run.py"),
+        vec![String::from("snippets/snip_python_2/src/some/module.py")],
+    );
+    expected.insert(
+        String::from("snippets/snip_python_2/src/some/module.py"),
+        vec![String::from("snippets/snip_python_2/src/cool/module.py")],
+    );
+    expected.insert(
+        String::from("snippets/snip_python_2/src/cool/module.py"),
+        vec![String::from("snippets/snip_python_2/src/some/module.py")],
+    );
+    assert_eq!(expected, dependants);
 }
