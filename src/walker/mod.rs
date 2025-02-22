@@ -6,7 +6,7 @@ pub mod python_walker;
 pub mod rust_walker;
 
 pub trait Walker {
-    fn walk(&self, path: &str) -> Vec<String>;
+    fn walk(&self, path: &str, root_dir: &str) -> Vec<String>;
 }
 
 pub fn file_extension_to_walker(path: &str) -> Box<dyn Walker> {
