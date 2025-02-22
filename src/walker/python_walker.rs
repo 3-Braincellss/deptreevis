@@ -1,9 +1,7 @@
 use crate::walker::Walker;
 use std::fs::read_to_string;
 
-pub struct PythonWalker {
-    file_path: String,
-}
+pub struct PythonWalker {}
 
 impl Walker for PythonWalker {
     fn walk(&self, path: &str) -> Vec<String> {
@@ -17,10 +15,8 @@ impl Walker for PythonWalker {
 }
 
 impl PythonWalker {
-    pub fn new(path: &str) -> Self {
-        Self {
-            file_path: String::from(path),
-        }
+    pub fn new() -> Self {
+        Self {}
     }
 
     fn import_statement_to_path(&self, path: &str) -> String {

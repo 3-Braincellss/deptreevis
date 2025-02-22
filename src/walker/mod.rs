@@ -12,7 +12,7 @@ pub trait Walker {
 pub fn file_extension_to_walker(path: &str) -> Box<dyn Walker> {
     let extension = get_file_extension(path);
     return match extension {
-        FileExtension::Python => Box::new(PythonWalker::new(path)),
-        FileExtension::Rust => Box::new(RustWalker::new(path)),
+        FileExtension::Python => Box::new(PythonWalker::new()),
+        FileExtension::Rust => Box::new(RustWalker::new()),
     };
 }
