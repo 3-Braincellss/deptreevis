@@ -3,7 +3,7 @@ use crate::walker::Walker;
 pub struct RustWalker {}
 
 impl Walker for RustWalker {
-    fn walk(&self, path: &str) -> Vec<String> {
+    fn walk(&self, _path: &str, _root_dir: &str) -> Vec<String> {
         panic!("Not Implemented");
     }
 }
