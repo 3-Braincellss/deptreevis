@@ -1,0 +1,18 @@
+name: DPV-UI
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    paths:
+      - clients/web/dpv-ui/**
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - name: Build UI
+        working-directory: ./clients/web/dpv-ui
+        run: bun fresh-build
