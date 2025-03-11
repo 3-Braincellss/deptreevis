@@ -13,6 +13,5 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
-      - name: Build
-        run: bun fresh
-        run: bun run build
+      - run: bun fresh
+      - run: bun run build
