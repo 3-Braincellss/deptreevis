@@ -15,6 +15,4 @@ jobs:
       - uses: oven-sh/setup-bun@v2
       - name: Build UI
         working-directory: ./clients/web/dpv-ui
-        run: |
-          bun install
-          bun build
+        run: bun fresh-build
