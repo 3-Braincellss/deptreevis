@@ -13,5 +13,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2
-      - run: bun fresh
-      - run: bun run build
+      - name: Build UI
+        working-directory: ./clients/web/dpv-ui
+        run: |
+          bun fresh
+          bun run build
