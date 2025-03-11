@@ -16,5 +16,5 @@ jobs:
       - name: Build UI
         working-directory: ./clients/web/dpv-ui
         run: |
-          bun fresh
-          bun run build
+          bun install
+          bun build

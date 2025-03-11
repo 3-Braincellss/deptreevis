@@ -1,7 +1,7 @@
 import ForceGraph2D from "react-force-graph-2d";
 import { Center, Stack, Title } from "@mantine/core";
 
-export function genRandomTree(N = 300, reverse = false) {
+function genRandomTree(N = 300, reverse = false) {
   return {
     nodes: [...Array(N).keys()].map((i) => ({ id: i })),
     links: [...Array(N).keys()]

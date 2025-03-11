@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "fresh": "rm -rf node_modules && bun install && bun start",
+    "fresh-build": "rm -rf node_modules && rm -rf dist && bun install && bun lint && bun run build",
     "start": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
